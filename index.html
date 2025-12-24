@@ -1,3 +1,6 @@
+# بارش برف
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +9,10 @@
 <body>
     <script>
         let b = [];
+        let frame = 0;
         
         function setup(){ 
             createCanvas(800,600); 
-            for(let i=0;i<10;i++){
-                b[i]={x:random(800),y:random(-100,0)};
-            }
         }
         
         function draw(){
@@ -19,12 +20,15 @@
             fill(255);
             noStroke();
             
-            for(let i=0;i<b.length;i++){
+            if(frame % 20 === 0 && b.length < 50){
+                b.push({x:random(800), y:0});
+            }
+            
+            for(let i=b.length-1; i>=0; i--){
                 b[i].y += 0.7;
-                circle(b[i].x,b[i].y,4);
-                if(b[i].y>600){
-                    b[i].y=0;
-                    b[i].x=random(800);
+                circle(b[i].x, b[i].y, random(3,6));
+                if(b[i].y > 600){
+                    b.splice(i,1);
                 }
             }
             
@@ -33,7 +37,10 @@
             text("نام: حسین حوت گنج آبادی",20,520);
             text("شماره دانشجویی: 403890085",20,550);
             text("کد ملی: 3380767425",20,580);
+            
+            frame++;
         }
     </script>
 </body>
 </html>
+```
